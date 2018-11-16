@@ -1,0 +1,23 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+    exclude: []
+  TooManyStatements:
+    enabled: true
+    max_statements: 12
+  UncommunicativeVariableName:
+    enabled: true
+    exclude: []
+    reject:
+      - '/^.$/'
+      - '/[0-9]$/'
+      - '/[A-Z]/'
+    accept:
+      - '_'
+  UtilityFunction:
+    enabled: false
+  Attribute:
+    enabled: false
+    exclude: []
+  InstanceVariableAssumption:
+    enabled: false
