@@ -8,7 +8,7 @@ module I18nLinter
       string_position = line[0]
       @line_number = string_position[0]
       @column_number = string_position[1]
-      @string = line[1]
+      @string = line[2]
     end
   end
 end

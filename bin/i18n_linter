@@ -13,8 +13,7 @@ options = I18nLinter::Options.new
 opt = OptionParser.new
 opt.banner = 'Usage: i18n_linter'
 opt.on('-f PATTERN', '--files=PATTERN', "pattern to find files, default: -f '**/*.rb'") do |pattern|
-  @pattern = pattern
-  options.files = [@pattern]
+  options.files = [pattern]
 end
 
 opt.parse!

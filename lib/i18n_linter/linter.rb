@@ -16,9 +16,8 @@ module I18nLinter
 
     def show_errors(results)
       puts
-      files = Hash.new { |hash, key| hash[key] = File.readlines(key) }
       results.each do |result|
-        file = files[result.filename]
+        file = File.readlines(result.filename)
         line = result.line
         print_block(result, file, line)
       end
@@ -31,10 +30,12 @@ module I18nLinter
       Ripper.lex(file, filename)
     end
 
+    # :reek:FeatureEnvy refers to line more than self
     def find_strings(file)
       (file.select do |line|
-        string_content = line[1]
-        string_content == :on_tstring_content && need_i18n?(string_content)
+        token_type = line[1]
+        string_content = line[2]
+        token_type == :on_tstring_content && need_i18n?(string_content)
       end).map do |string_line|
         StringLine.new(string_line)
       end
@@ -46,6 +47,10 @@ module I18nLinter
         result_set.add_result(Result.new(filename, line, line.string))
       end
       result_set
+    end
+
+    def need_i18n?(_string)
+      true
     end
 
     def print_block(result, file, line)
