@@ -44,7 +44,7 @@ GEM
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
-    jaro_winkler (1.5.1)
+    jaro_winkler (1.5.1-x86_64-darwin-17)
     kwalify (0.7.2)
     loofah (2.2.3)
       crass (~> 1.0.2)

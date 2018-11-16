@@ -1,58 +1,11 @@
 require 'i18n_linter/options'
+require 'i18n_linter/result'
+require 'i18n_linter/result_set'
+require 'i18n_linter/string_line'
 require 'ripper'
-require 'byebug'
 
 module I18nLinter
   class Linter
-    class AttributesParseError < StandardError; end
-
-    class Result
-      attr_reader :filename
-      attr_reader :line
-      attr_reader :string
-
-      def initialize(filename, line, string)
-        @filename = filename
-        @line = line
-        @string = string
-      end
-    end
-
-    class ResultSet
-      include Enumerable
-
-      def initialize
-        @results = []
-      end
-
-      def add_result(result)
-        @results << result
-      end
-
-      def each
-        @results.each do |result|
-          yield result
-        end
-      end
-
-      def success?
-        count.zero?
-      end
-    end
-
-    class StringLine
-      attr_reader :line_number
-      attr_reader :column_number
-      attr_reader :string
-
-      def initialize(line)
-        string_position = line[0]
-        @line_number = string_position[0]
-        @column_number = string_position[1]
-        @string = line[1]
-      end
-    end
-
     def initialize; end
 
     def lint(filename:, file:)
@@ -93,10 +46,6 @@ module I18nLinter
         result_set.add_result(Result.new(filename, line, line.string))
       end
       result_set
-    end
-
-    def need_i18n?(_string)
-      true
     end
 
     def print_block(result, file, line)
