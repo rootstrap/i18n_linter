@@ -30,7 +30,6 @@ module I18nLinter
       Ripper.lex(file, filename)
     end
 
-    # :reek:FeatureEnvy refers to line more than self
     def find_strings(file)
       (file.select do |line|
         token_type = line[1]

@@ -2,37 +2,20 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1-node-browsers
+      - image: circleci/ruby:2.5.3-node-browsers
 
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
       - run:
           name: run tests
-          command: RAILS_ENV=test bundle exec rspec
-
-      # run code_analysis!
+          command: bundle exec rspec
       - run:
           name: run rubocop
-          command: RAILS_ENV=test bundle exec rubocop
+          command: bundle exec rubocop
       - run:
           name: run reek
-          command: RAILS_ENV=test bundle exec reek -c config.reek lib
-
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+          command: bundle exec reek -c config.reek lib

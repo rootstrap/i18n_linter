@@ -21,3 +21,8 @@ detectors:
     exclude: []
   InstanceVariableAssumption:
     enabled: false
+  FeatureEnvy:
+    enabled: true
+    exclude: [
+      'Linter#find_strings'
+    ]
