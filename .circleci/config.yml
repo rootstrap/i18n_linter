@@ -1,9 +1,8 @@
 version: 2
 jobs:
-  build:
+  'ruby-2.3.8':
     docker:
-      - image: circleci/ruby:2.5.3-node-browsers
-
+      - image: circleci/ruby:2.3.8-node-browsers
     steps:
       - checkout
       - run:
@@ -19,3 +18,47 @@ jobs:
       - run:
           name: run reek
           command: bundle exec reek -c config.reek lib
+  'ruby-2.4.5':
+    docker:
+      - image: circleci/ruby:2.4.5-node-browsers
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run:
+          name: run tests
+          command: bundle exec rspec
+      - run:
+          name: run rubocop
+          command: bundle exec rubocop
+      - run:
+          name: run reek
+          command: bundle exec reek -c config.reek lib
+  'ruby-2.5.3':
+    docker:
+      - image: circleci/ruby:2.5.3-node-browsers
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run:
+          name: run tests
+          command: bundle exec rspec
+      - run:
+          name: run rubocop
+          command: bundle exec rubocop
+      - run:
+          name: run reek
+          command: bundle exec reek -c config.reek lib
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - 'ruby-2.3.8'
+      - 'ruby-2.4.5'
+      - 'ruby-2.5.3'
