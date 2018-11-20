@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'i18n_linter'
+require 'i18n_linter/version'
+require 'i18n_linter/runner'
+require 'i18n_linter/options'
+require 'optparse'
+
+Version = I18nLinter::VERSION
+
+options = I18nLinter::Options.new
+
+opt = OptionParser.new
+opt.banner = 'Usage: i18n_linter'
+opt.on('-f PATTERN', '--files=PATTERN', "pattern to find files, default: -f '**/*.rb'") do |pattern|
+  options.files = [pattern]
+end
+
+opt.parse!
+
+runner = I18nLinter::Runner.new(options)
+ret = runner.run
+exit(ret)
