@@ -26,3 +26,8 @@ detectors:
     exclude: [
       'Linter#find_strings'
     ]
+  ManualDispatch:
+    enabled: true
+    exclude: [
+      'Config#yaml_safe_load'
+    ]

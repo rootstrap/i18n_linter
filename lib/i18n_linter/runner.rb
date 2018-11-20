@@ -1,11 +1,12 @@
 require 'i18n_linter/linter'
 require 'i18n_linter/options'
+require 'i18n_linter/config'
 
 module I18nLinter
   class Runner
-    def initialize(options)
+    def initialize(options, config)
       @options = options
-      @linter = I18nLinter.linter.new
+      @linter = I18nLinter.linter.new(options, config)
     end
 
     def run

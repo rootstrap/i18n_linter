@@ -1,0 +1,7 @@
+AllRules:
+  Include:
+    - '**/*.rb'
+  Exclude:
+    - 'config/**/*'
+    - 'spec/**/*'
+    - 'db/**/*'
