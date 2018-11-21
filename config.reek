@@ -26,8 +26,8 @@ detectors:
     exclude: [
       'Linter#find_strings'
     ]
-  ManualDispatch:
+  DuplicateMethodCall:
     enabled: true
     exclude: [
-      'Config#yaml_safe_load'
+      'Linter#print_block'
     ]

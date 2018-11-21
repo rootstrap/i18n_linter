@@ -7,13 +7,19 @@ module I18nLinter
     DEFAULT_FILE = File.join(I18N_LINTER_HOME, 'config', 'default.yml')
 
     def initialize
-      path = if from_file?
-               DOTFILE
-             else
-               DEFAULT_FILE
-             end
+      path = from_file? ? DOTFILE : DEFAULT_FILE
       @hash = load_yaml_configuration(path)
     end
+
+    def patterns_to_include
+      all_rules['Include'] || []
+    end
+
+    def patterns_to_exclude
+      all_rules['Exclude'] || []
+    end
+
+    private
 
     def [](key)
       @hash[key]
@@ -27,14 +33,6 @@ module I18nLinter
       @all_rules ||= self['AllRules'] || {}
     end
 
-    def patterns_to_include
-      all_rules['Include'] || []
-    end
-
-    def patterns_to_exclude
-      all_rules['Exclude'] || []
-    end
-
     def load_yaml_configuration(path)
       yaml_code = File.read(path)
       hash = yaml_safe_load(yaml_code, path) || {}
@@ -45,21 +43,7 @@ module I18nLinter
     end
 
     def yaml_safe_load(yaml_code, filename)
-      if defined?(SafeYAML) && SafeYAML.respond_to?(:load)
-        SafeYAML.load(yaml_code, filename,
-                      whitelisted_tags: %w[!ruby/regexp])
-      # Ruby 2.6+
-      elsif Gem::Version.new(Psych::VERSION) >= Gem::Version.new('3.1.0.pre1')
-        YAML.safe_load(
-          yaml_code,
-          permitted_classes: [Regexp, Symbol],
-          permitted_symbols: [],
-          aliases: false,
-          filename: filename
-        )
-      else
-        YAML.safe_load(yaml_code, [Regexp, Symbol], [], false, filename)
-      end
+      YAML.safe_load(yaml_code, [Regexp, Symbol], [], false, filename)
     end
   end
 end
