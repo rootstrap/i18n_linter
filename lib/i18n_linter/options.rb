@@ -2,6 +2,10 @@ module I18nLinter
   class Options
     attr_writer :files
 
+    def initialize(config)
+      @config = config
+    end
+
     def files
       return Dir[*@files].uniq if @files
 
@@ -9,7 +13,7 @@ module I18nLinter
     end
 
     def supported_files
-      Dir['*app/**/*.rb', '*lib/**/*.rb'].uniq
+      (Dir.glob(@config.patterns_to_include, 0) - Dir.glob(@config.patterns_to_exclude, 0)).uniq
     end
   end
 end

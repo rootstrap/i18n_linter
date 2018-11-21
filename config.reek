@@ -26,3 +26,8 @@ detectors:
     exclude: [
       'Linter#find_strings'
     ]
+  DuplicateMethodCall:
+    enabled: true
+    exclude: [
+      'Linter#print_block'
+    ]

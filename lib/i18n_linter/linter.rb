@@ -6,7 +6,10 @@ require 'ripper'
 
 module I18nLinter
   class Linter
-    def initialize; end
+    def initialize(options, config)
+      @options = options
+      @config = config
+    end
 
     def lint(filename:, file:)
       parsed_file = parse(filename, file)
@@ -54,19 +57,16 @@ module I18nLinter
 
     def print_block(result, file, line)
       line_number = line.line_number
+      column_number = line.column_number
 
-      previous_line_number = line_number - 2
-      current_line_number = line_number - 1
-      next_line_number = line_number
+      previous_line = file[line_number - 2]
+      current_line = file[line_number - 1]
+      next_line = file[line_number]
 
-      previous_line = file[previous_line_number]
-      current_line = file[current_line_number]
-      next_line = file[next_line_number]
-
-      puts "#{result.filename}:#{line_number}:#{line.column_number}"
-      puts "#{previous_line_number}:  #{previous_line}" if previous_line
-      puts "#{current_line_number}:  #{current_line}"
-      puts "#{next_line_number}:  #{next_line}" if next_line
+      puts "#{result.filename}:#{line_number}:#{column_number}"
+      puts "#{line_number - 1}:  #{previous_line}" if previous_line
+      puts "#{line_number}:  #{current_line}"
+      puts "#{line_number + 1}:  #{next_line}" if next_line
       puts '-' * 16
     end
   end
