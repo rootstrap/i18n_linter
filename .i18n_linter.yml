@@ -1,0 +1,3 @@
+AllRules:
+  Include:
+    - 'spec/fixtures/**/*.rb'

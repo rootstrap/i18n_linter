@@ -10,18 +10,37 @@ module I18nLinter
     end
 
     def run
-      @options.files.map do |file|
-        result = lint(file)
-        if result.success?
+      $stdout = StringIO.new
+
+      result = @options.files.map do |file|
+        lint_result = lint(file)
+        if lint_result.success?
           true
         else
-          @linter.show_errors(result)
+          @linter.show_errors(lint_result)
           false
         end
       end.all?
+
+      handle_results($stdout)
+
+      result
     end
 
     private
+
+    def handle_results(stdout)
+      output_file = @options.out_file
+      output = stdout.string
+
+      if output_file
+        File.open(output_file, 'w') do |file|
+          file.write output
+        end
+      else
+        STDOUT.puts output
+      end
+    end
 
     def lint(filename)
       file = File.read(filename)
