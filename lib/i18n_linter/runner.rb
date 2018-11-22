@@ -22,16 +22,18 @@ module I18nLinter
         end
       end.all?
 
-      handle_results($stdout)
+      handle_results
+
+      $stdout = STDOUT
 
       result
     end
 
     private
 
-    def handle_results(stdout)
+    def handle_results
       output_file = @options.out_file
-      output = stdout.string
+      output = $stdout.string
 
       if output_file
         File.open(output_file, 'w') do |file|

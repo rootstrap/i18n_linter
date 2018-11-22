@@ -14,18 +14,9 @@ RSpec.describe 'Basic Integration Test' do
 
     path
   end
-
-  let(:actual_output) do
-    File.read(output_path)
-  end
-
-  let(:expected_path) do
-    File.join(spec_root, 'fixtures/basic/expected.txt')
-  end
-
-  let(:expected_output) do
-    File.read(expected_path)
-  end
+  let(:actual_output)   { File.read(output_path) }
+  let(:expected_path)   { File.join(spec_root, 'fixtures/basic/expected.txt') }
+  let(:expected_output) { File.read(expected_path) }
 
   it 'outputs the result' do
     expect(actual_output).to eq(expected_output)
