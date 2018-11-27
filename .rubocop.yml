@@ -12,3 +12,8 @@ Metrics/MethodLength:
 
 Metrics/LineLength:
   Max: 100
+
+Style/SymbolArray:
+  Enabled: true
+  Exclude:
+    - spec/fixtures/basic/basic_controller.rb # Just for now

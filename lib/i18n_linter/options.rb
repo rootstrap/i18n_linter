@@ -1,6 +1,7 @@
 module I18nLinter
   class Options
     attr_writer :files
+    attr_accessor :out_file
 
     def initialize(config)
       @config = config

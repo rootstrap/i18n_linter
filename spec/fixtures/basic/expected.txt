@@ -1,0 +1,17 @@
+
+spec/fixtures/basic/basic_controller.rb:42:42
+41:    def render_update_success
+42:      render status: :ok, json: { message: 'car was successfully updated.' }
+43:    end
+----------------
+spec/fixtures/basic/basic_controller.rb:46:42
+45:    def render_create_success
+46:      render status: :ok, json: { message: 'Car was successfully created.' }
+47:    end
+----------------
+spec/fixtures/basic/basic_controller.rb:50:42
+49:    def render_destroy_success
+50:      render status: :ok, json: { message: 'Destroyed.' }
+51:    end
+----------------
+

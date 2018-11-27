@@ -14,8 +14,11 @@ options = I18nLinter::Options.new(config)
 
 opt = OptionParser.new
 opt.banner = 'Usage: i18n_linter'
-opt.on('-f PATTERN', '--files=PATTERN', "pattern to find files, default: -f '**/*.rb'") do |pattern|
+opt.on('-f PATTERN', '--files=PATTERN', "Pattern to find files, default: -f '**/*.rb'") do |pattern|
   options.files = [pattern]
+end
+opt.on('-o FILE', '--out=FILE', 'Write output to a file instead of STDOUT') do |file|
+  options.out_file = file
 end
 
 opt.parse!
