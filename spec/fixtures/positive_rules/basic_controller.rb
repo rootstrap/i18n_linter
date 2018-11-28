@@ -14,8 +14,11 @@ class CarsController < ApplicationController
   def edit; end
 
   def create
-    Car.create!(car_params)
-    render_create_success
+    if Car.create!(car_params)
+      render_create_success
+    else
+      render_create_error
+    end
   end
 
   def update
@@ -39,14 +42,22 @@ class CarsController < ApplicationController
   end
 
   def render_update_success
+    # Testing MiddleSpace rule
     render status: :ok, json: { message: 'car was successfully updated.' }
   end
 
   def render_create_success
+    # Testing Uppercase and MiddleSpace rules
     render status: :ok, json: { message: 'Car was successfully created.' }
   end
 
   def render_destroy_success
+    # Testing Uppercase rule
     render status: :ok, json: { message: 'Destroyed.' }
+  end
+
+  def render_create_error
+    # Testing the negativity of Uppercase and MiddleSpace rules
+    render status: :ok, json: { message: 'error' }
   end
 end

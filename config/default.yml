@@ -1,7 +1,22 @@
-AllRules:
+Linter:
   Include:
     - '**/*.rb'
   Exclude:
     - 'config/**/*'
     - 'spec/**/*'
     - 'db/**/*'
+Rules:
+  Uppercase:
+    Enabled: true
+  MiddleSpace:
+    Enabled: true
+  ForwardSlash:
+    Enabled: true
+  MiddleDash:
+    Enabled: true
+  EnvironmentVariable:
+    Enabled: true
+  ClassName:
+    Enabled: true
+  Constant:
+    Enabled: true

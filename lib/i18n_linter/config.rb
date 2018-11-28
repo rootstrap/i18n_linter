@@ -12,11 +12,19 @@ module I18nLinter
     end
 
     def patterns_to_include
-      all_rules['Include'] || []
+      linter_patterns['Include'] || []
     end
 
     def patterns_to_exclude
-      all_rules['Exclude'] || []
+      linter_patterns['Exclude'] || []
+    end
+
+    def enabled_positive_rules
+      all_rules.keys.select { |rule| positive_rule(rule) && enabled_rule?(rule) }
+    end
+
+    def enabled_negative_rules
+      all_rules.keys.select { |rule| negative_rule(rule) && enabled_rule?(rule) }
     end
 
     private
@@ -29,8 +37,24 @@ module I18nLinter
       File.exist?(DOTFILE)
     end
 
+    def linter_patterns
+      @linter_patterns ||= self['Linter'] || {}
+    end
+
     def all_rules
-      @all_rules ||= self['AllRules'] || {}
+      @all_rules ||= self['Rules'] || {}
+    end
+
+    def enabled_rule?(rule)
+      all_rules[rule]['Enabled']
+    end
+
+    def positive_rule(rule)
+      Rules::POSITIVE_RULES.include?(rule)
+    end
+
+    def negative_rule(rule)
+      Rules::NEGATIVE_RULES.include?(rule)
     end
 
     def load_yaml_configuration(path)
