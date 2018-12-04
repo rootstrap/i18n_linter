@@ -56,15 +56,15 @@ module I18nLinter
     end
 
     def check_positive_rules(plain_line, string_content)
-      @config.enabled_positive_rules.map do |rule|
+      @config.enabled_positive_rules.any? do |rule|
         Rules.check_rule(rule, plain_line, string_content)
-      end.any?
+      end
     end
 
     def check_negative_rules(plain_line, string_content)
-      @config.enabled_negative_rules.map do |rule|
+      @config.enabled_negative_rules.none? do |rule|
         Rules.check_rule(rule, plain_line, string_content)
-      end.none?
+      end
     end
 
     def print_block(result, file, line)

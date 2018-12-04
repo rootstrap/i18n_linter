@@ -8,7 +8,7 @@ module I18nLinter
       private
 
       def constant?(plain_line, string)
-        /[A-Z]+[ ]*?\=[ ]*[\'\"]#{string}[\'\"]/ =~ plain_line
+        /[A-Z]+[ ]*?\=[ ]*['"][^'"]*#{string}[^'"]*['"]/ =~ plain_line
       end
     end
   end

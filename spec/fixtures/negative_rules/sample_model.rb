@@ -4,4 +4,5 @@ class Video < ApplicationRecord
 
   # Testing Constant rule
   VIDEO_STATUS_READY = 'ready'.freeze
+  ERROR_CODES = '[NOT_FOUND]'.freeze
 end

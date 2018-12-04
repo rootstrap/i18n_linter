@@ -3,6 +3,7 @@ class SampleService
 
   # Testing EnvironmentVariable rule
   base_uri ENV['RESOURCE_URL']
+  TEST_VAR = ENV.fetch('TEST_VAR')
 
   def send_message
     post(
