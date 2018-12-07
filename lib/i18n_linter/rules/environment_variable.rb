@@ -8,8 +8,10 @@ module I18nLinter
       private
 
       def env_variable?(plain_line, string)
-        /ENV\[['"]#{string}['"]\]/ =~ plain_line ||
-          /ENV\.fetch\(['"]#{string}['"]\)/ =~ plain_line
+        escaped_string = Regexp.escape(string)
+
+        /ENV\[['"]#{escaped_string}['"]\]/ =~ plain_line ||
+          /ENV\.fetch\(['"]#{escaped_string}['"]\)/ =~ plain_line
       end
     end
   end
