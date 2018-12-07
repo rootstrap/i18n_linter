@@ -16,4 +16,4 @@ Metrics/LineLength:
 Style/SymbolArray:
   Enabled: true
   Exclude:
-    - spec/fixtures/basic/basic_controller.rb # Just for now
+    - spec/fixtures/positive_rules/basic_controller.rb # Just for now

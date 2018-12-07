@@ -24,7 +24,8 @@ detectors:
   FeatureEnvy:
     enabled: true
     exclude: [
-      'Linter#find_strings'
+      'Linter#find_strings', # Refers to line more than self
+      'Linter#print_block' # Refers to line_number more than self
     ]
   DuplicateMethodCall:
     enabled: true

@@ -13,6 +13,8 @@ module I18nLinter
       supported_files
     end
 
+    private
+
     def supported_files
       (Dir.glob(@config.patterns_to_include, 0) - Dir.glob(@config.patterns_to_exclude, 0)).uniq
     end
