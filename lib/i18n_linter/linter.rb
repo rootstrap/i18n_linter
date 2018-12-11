@@ -14,13 +14,11 @@ module I18nLinter
     end
 
     def show_errors(results)
-      puts
       results.each do |result|
         file = File.readlines(result.filename)
         line = result.line
         print_block(result, file, line)
       end
-      puts
     end
 
     private
@@ -75,7 +73,11 @@ module I18nLinter
       current_line = file[line_number - 1]
       next_line = file[line_number] if line_number < file.length
 
-      puts "#{result.filename}:#{line_number}:#{column_number}"
+      warning_header = "#{result.filename}:#{line_number}:#{column_number}"
+
+      return if @config.excluded_warnings.include?(warning_header)
+
+      puts warning_header
       puts "#{line_number - 1}:  #{previous_line}" if previous_line
       puts "#{line_number}:  #{current_line}"
       puts "#{line_number + 1}:  #{next_line}" if next_line

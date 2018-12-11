@@ -27,6 +27,10 @@ module I18nLinter
       all_rules.keys.select { |rule| negative_rule(rule) && enabled_rule?(rule) }
     end
 
+    def excluded_warnings
+      warnings['Exclude'] || []
+    end
+
     private
 
     def [](key)
@@ -39,6 +43,10 @@ module I18nLinter
 
     def linter_patterns
       @linter_patterns ||= self['Linter'] || {}
+    end
+
+    def warnings
+      @warnings ||= self['Warnings'] || {}
     end
 
     def all_rules

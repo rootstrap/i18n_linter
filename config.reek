@@ -5,6 +5,10 @@ detectors:
   TooManyStatements:
     enabled: true
     max_statements: 12
+  TooManyMethods:
+    enabled: true
+    exclude: []
+    max_methods: 25
   UncommunicativeVariableName:
     enabled: true
     exclude: []
@@ -25,7 +29,8 @@ detectors:
     enabled: true
     exclude: [
       'Linter#find_strings', # Refers to line more than self
-      'Linter#print_block' # Refers to line_number more than self
+      'Linter#print_block', # Refers to line_number more than self
+      'Linter#show_errors' # Refers to result more than self
     ]
   DuplicateMethodCall:
     enabled: true

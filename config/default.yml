@@ -20,3 +20,5 @@ Rules:
     Enabled: true
   Constant:
     Enabled: true
+Warnings:
+  Exclude: []
