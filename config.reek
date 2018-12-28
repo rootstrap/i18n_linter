@@ -1,0 +1,34 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+    exclude: []
+  TooManyStatements:
+    enabled: true
+    max_statements: 12
+  UncommunicativeVariableName:
+    enabled: true
+    exclude: []
+    reject:
+      - '/^.$/'
+      - '/[0-9]$/'
+      - '/[A-Z]/'
+    accept:
+      - '_'
+  UtilityFunction:
+    enabled: false
+  Attribute:
+    enabled: false
+    exclude: []
+  InstanceVariableAssumption:
+    enabled: false
+  FeatureEnvy:
+    enabled: true
+    exclude: [
+      'Linter#find_strings', # Refers to line more than self
+      'Linter#print_block' # Refers to line_number more than self
+    ]
+  DuplicateMethodCall:
+    enabled: true
+    exclude: [
+      'Linter#print_block'
+    ]

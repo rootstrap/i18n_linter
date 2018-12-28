@@ -1,0 +1,19 @@
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 15
+  Exclude:
+    - lib/i18n_linter/linter.rb
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 24
+
+Metrics/LineLength:
+  Max: 100
+
+Style/SymbolArray:
+  Enabled: true
+  Exclude:
+    - spec/fixtures/positive_rules/basic_controller.rb # Just for now

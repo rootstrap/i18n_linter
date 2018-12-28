@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require 'i18n_linter'
+require 'i18n_linter/version'
+require 'i18n_linter/runner'
+require 'i18n_linter/options'
+require 'i18n_linter/config'
+require 'optparse'
+
+Version = I18nLinter::VERSION
+
+config = I18nLinter::Config.new
+options = I18nLinter::Options.new(config)
+
+opt = OptionParser.new
+opt.banner = 'Usage: i18n_linter'
+opt.on('-f PATTERN', '--files=PATTERN', "Pattern to find files, default: -f '**/*.rb'") do |pattern|
+  options.files = [pattern]
+end
+opt.on('-o FILE', '--out=FILE', 'Write output to a file instead of STDOUT') do |file|
+  options.out_file = file
+end
+
+opt.parse!
+
+runner = I18nLinter::Runner.new(options, config)
+ret = runner.run
+exit(ret)
