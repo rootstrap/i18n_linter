@@ -10,7 +10,7 @@ module I18nLinter
       def constant?(plain_line, string)
         escaped_string = Regexp.escape(string)
 
-        /[A-Z]+[ ]*?\=[ ]*['"][^'"]*#{escaped_string}[^'"]*['"]/ =~ plain_line
+        /[A-Z]+\s*?\=\s*#{escaped_string}/ =~ plain_line
       end
     end
   end

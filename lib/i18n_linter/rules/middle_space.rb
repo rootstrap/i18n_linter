@@ -8,7 +8,7 @@ module I18nLinter
       private
 
       def middle_space?(string)
-        /[a-zA-Z\d][ ]+[a-zA-Z\d]/ =~ string
+        /[a-zA-Z\d]\s+[a-zA-Z\d]/ =~ string
       end
     end
   end

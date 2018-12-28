@@ -8,7 +8,7 @@ module I18nLinter
     end
 
     def lint(filename:, file:)
-      parsed_file = parse(filename, file)
+      parsed_file = tokenize_file(filename, file)
       lines = find_strings(filename, parsed_file)
       compile(filename, lines)
     end
@@ -25,17 +25,44 @@ module I18nLinter
 
     private
 
-    def parse(filename, file)
-      Ripper.lex(file, filename)
+    def tokenize_file(filename, file)
+      Ripper.lex(file, filename).map { |token| Token.new(token) }
+    end
+
+    def get_token(file, index)
+      file[index]
+    end
+
+    def get_string_array(file, current_index)
+      (rest_of_file(file, current_index).take_while do |token|
+        token.type != :on_tstring_end
+      end).map(&:content)
+    end
+
+    def rest_of_file(file, current_index)
+      file.last(file.length - current_index)
     end
 
     def find_strings(filename, file)
-      (file.select do |line|
-        token_type = line[1]
-        token_type == :on_tstring_content && need_i18n?(filename, line)
-      end).map do |string_line|
-        StringLine.new(string_line)
+      strings = []
+      current_index = 0
+
+      while current_index < file.length
+        token = get_token(file, current_index)
+
+        if token.type == :on_tstring_beg
+          new_array_string = get_string_array(file, current_index)
+          current_index += new_array_string.length
+          new_array_string << file[current_index].content
+          new_string = [token.coords, new_array_string.join]
+
+          strings << StringLine.new(new_string) if need_i18n?(filename, new_string)
+        end
+
+        current_index += 1
       end
+
+      strings
     end
 
     def compile(filename, lines)
@@ -49,7 +76,7 @@ module I18nLinter
     def need_i18n?(filename, line)
       file = File.readlines(filename)
       plain_line = file[line[0][0] - 1]
-      string_content = line[2]
+      string_content = line[1]
 
       check_positive_rules(plain_line, string_content) &&
         check_negative_rules(plain_line, string_content)
