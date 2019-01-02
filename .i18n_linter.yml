@@ -18,3 +18,5 @@ Rules:
     Enabled: true
   Logger:
     Enabled: true
+  Puts:
+    Enabled: true

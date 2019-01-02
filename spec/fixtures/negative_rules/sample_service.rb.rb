@@ -14,4 +14,10 @@ class SampleService
       body: { message: 'test' }
     )
   end
+
+  def perform
+    # Testing Puts rule
+    puts "Request's response: "
+    puts send_message
+  end
 end
