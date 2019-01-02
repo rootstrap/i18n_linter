@@ -31,6 +31,14 @@ class CarsController < ApplicationController
     render_destroy_success
   end
 
+  def sample_method
+    # Testing interpolated strings
+    interpolated_string = 'string var'
+    sample_var = "This is a #{interpolated_string}"
+
+    puts sample_var
+  end
+
   private
 
   def set_car

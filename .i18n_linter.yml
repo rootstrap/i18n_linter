@@ -16,3 +16,5 @@ Rules:
     Enabled: true
   Constant:
     Enabled: true
+  Logger:
+    Enabled: true

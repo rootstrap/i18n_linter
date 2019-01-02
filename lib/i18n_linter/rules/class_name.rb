@@ -10,7 +10,7 @@ module I18nLinter
       def class_name?(plain_line, string)
         escaped_string = Regexp.escape(string)
 
-        /class\_name\:[ ]*?['"]#{escaped_string}['"]/ =~ plain_line
+        /class\_name\:\s*#{escaped_string}/ =~ plain_line
       end
     end
   end

@@ -12,7 +12,7 @@ module I18nLinter
     def run
       $stdout = StringIO.new
 
-      result = @options.files.map do |file|
+      result = @options.files.map { |file|
         lint_result = lint(file)
         if lint_result.success?
           true
@@ -20,7 +20,7 @@ module I18nLinter
           @linter.show_errors(lint_result)
           false
         end
-      end.all?
+      }.all?
 
       handle_results
 
