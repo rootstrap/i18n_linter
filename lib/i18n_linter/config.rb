@@ -9,6 +9,7 @@ module I18nLinter
     def initialize
       path = from_file? ? DOTFILE : DEFAULT_FILE
       @hash = load_yaml_configuration(path)
+      add_missing_rules(@hash['Rules'])
     end
 
     def patterns_to_include
@@ -68,6 +69,13 @@ module I18nLinter
 
     def yaml_safe_load(yaml_code, filename)
       YAML.safe_load(yaml_code, [Regexp, Symbol], [], false, filename)
+    end
+
+    def add_missing_rules(loaded_rules)
+      missing = (Rules::POSITIVE_RULES + Rules::NEGATIVE_RULES) - loaded_rules.keys
+      missing.each do |rule|
+        loaded_rules.store(rule, 'Enabled' => true)
+      end
     end
   end
 end
