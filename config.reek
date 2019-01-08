@@ -32,3 +32,6 @@ detectors:
     exclude: [
       'Linter#print_block'
     ]
+  NilCheck:
+    enabled: false
+    exclude: []

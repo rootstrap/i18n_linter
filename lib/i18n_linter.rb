@@ -10,6 +10,7 @@ require 'i18n_linter/rules/class_name'
 require 'i18n_linter/rules/constant'
 require 'i18n_linter/rules/logger'
 require 'i18n_linter/rules/puts'
+require 'i18n_linter/rules/query'
 
 require 'i18n_linter/options'
 require 'i18n_linter/result'
