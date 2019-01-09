@@ -36,8 +36,10 @@ class CarsController < ApplicationController
     interpolated_string = 'string var'
     # Testing interpolated strings and Query rule
     sample_var = "This is a #{interpolated_string}"
+    car_brand = "This is a #{@car.brand} car"
 
     puts sample_var
+    puts car_brand
   end
 
   private

@@ -27,10 +27,10 @@ module I18nLinter
       end
 
       def custom_query_patterns
-        interpolated_variable = ->(match) { /^((?!\#\{#{match}\}).)*$/ }
+        not_an_interpolated_variable = ->(match) { /^((?!\#\{\@?#{match}\}).)*$/ }
         [
-          { matcher: /(\w+\_\w+)/, negative_rules: [interpolated_variable] },
-          { matcher: /(\w+\.\w+)/, negative_rules: [interpolated_variable] }
+          { matcher: /(\w+\_\w+)/, negative_rules: [not_an_interpolated_variable] },
+          { matcher: /(\w+\.\w+)/, negative_rules: [not_an_interpolated_variable] }
         ]
       end
 
