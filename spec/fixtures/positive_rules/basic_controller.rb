@@ -32,8 +32,9 @@ class CarsController < ApplicationController
   end
 
   def sample_method
-    # Testing interpolated strings
+    # Testing MiddleSpace rule
     interpolated_string = 'string var'
+    # Testing interpolated strings and Query rule
     sample_var = "This is a #{interpolated_string}"
 
     puts sample_var

@@ -7,9 +7,9 @@ class Video < ApplicationRecord
   ERROR_CODES = '[NOT_FOUND]'.freeze
 
   # Testing Query rule
-  scope :query_a, -> { select('followers.id').joins(:followers) }
-  scope :query_b, -> { select('user_id') }
-  scope :query_c, -> { select('followers.*').joins(:followers) }
+  scope :query_a, -> { select('followers.id, followers.username').joins(:followers) }
+  scope :query_b, -> { select('id, user_id') }
+  scope :query_c, -> { select('videos.id, followers.*').joins(:followers) }
   scope :query_d, ->(title) { where('title ILIKE ?', "%#{title}%") }
   scope :query_e, ->(gender) { where('gender ILIKE :gender', gender: "%#{gender}%") }
   scope :query_f, ->(title) { where('title LIKE ?', "%#{title}%") }

@@ -16,20 +16,21 @@ module I18nLinter
 
       def common_query_patterns
         [
-          /\w+\.\w+/,
           /\w+\.\*/,
-          /ILIKE (\?|:\w)/,
-          /ILIKE .*\%/,
-          /LIKE (\?|:\w)/,
-          /LIKE .*\%/,
+          /ILIKE (\?|:\w)/i,
+          /ILIKE .*\%/i,
+          /LIKE (\?|:\w)/i,
+          /LIKE .*\%/i,
           /\w+ asc/i,
           /\w+ desc/i
         ]
       end
 
       def custom_query_patterns
+        interpolated_variable = ->(match) { /^((?!\#\{#{match}\}).)*$/ }
         [
-          { matcher: /(\w+\_\w+)/, positive_rules: [->(match) { /^((?!\#\{#{match}\}).)*$/ }] }
+          { matcher: /(\w+\_\w+)/, negative_rules: [interpolated_variable] },
+          { matcher: /(\w+\.\w+)/, negative_rules: [interpolated_variable] }
         ]
       end
 
@@ -42,7 +43,7 @@ module I18nLinter
 
       def check_custom_pattern(pattern, string)
         get_matches(pattern[:matcher], string).any? do |match|
-          check_custom_rules(pattern[:positive_rules], match, string)
+          check_custom_rules(pattern[:negative_rules], match, string)
         end
       end
 

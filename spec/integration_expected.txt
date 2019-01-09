@@ -1,27 +1,27 @@
 
 spec/fixtures/positive_rules/basic_controller.rb:36:26
-35:      # Testing interpolated strings
+35:      # Testing MiddleSpace rule
 36:      interpolated_string = 'string var'
-37:      sample_var = "This is a #{interpolated_string}"
+37:      # Testing interpolated strings and Query rule
 ----------------
-spec/fixtures/positive_rules/basic_controller.rb:37:17
-36:      interpolated_string = 'string var'
-37:      sample_var = "This is a #{interpolated_string}"
-38:  
+spec/fixtures/positive_rules/basic_controller.rb:38:17
+37:      # Testing interpolated strings and Query rule
+38:      sample_var = "This is a #{interpolated_string}"
+39:  
 ----------------
-spec/fixtures/positive_rules/basic_controller.rb:54:41
-53:      # Testing MiddleSpace rule
-54:      render status: :ok, json: { message: 'car was successfully updated.' }
-55:    end
+spec/fixtures/positive_rules/basic_controller.rb:55:41
+54:      # Testing MiddleSpace rule
+55:      render status: :ok, json: { message: 'car was successfully updated.' }
+56:    end
 ----------------
-spec/fixtures/positive_rules/basic_controller.rb:59:41
-58:      # Testing Uppercase and MiddleSpace rules
-59:      render status: :ok, json: { message: 'Car was successfully created.' }
-60:    end
+spec/fixtures/positive_rules/basic_controller.rb:60:41
+59:      # Testing Uppercase and MiddleSpace rules
+60:      render status: :ok, json: { message: 'Car was successfully created.' }
+61:    end
 ----------------
-spec/fixtures/positive_rules/basic_controller.rb:64:41
-63:      # Testing Uppercase rule
-64:      render status: :ok, json: { message: 'Destroyed.' }
-65:    end
+spec/fixtures/positive_rules/basic_controller.rb:65:41
+64:      # Testing Uppercase rule
+65:      render status: :ok, json: { message: 'Destroyed.' }
+66:    end
 ----------------
 
