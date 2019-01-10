@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.executables = ['i18n_linter']
   s.bindir      = 'exe'
 
+  s.add_development_dependency 'rainbow', '~> 3.0'
   s.add_development_dependency 'reek', '~> 5.2'
   s.add_development_dependency 'rspec', '~> 3.8'
   s.add_development_dependency 'rubocop', '~> 0.59.2'
