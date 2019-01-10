@@ -24,3 +24,5 @@ Rules:
     Enabled: true
   Puts:
     Enabled: true
+  Query:
+    Enabled: true

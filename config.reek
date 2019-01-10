@@ -1,13 +1,11 @@
 detectors:
   IrresponsibleModule:
     enabled: false
-    exclude: []
   TooManyStatements:
     enabled: true
     max_statements: 12
   UncommunicativeVariableName:
     enabled: true
-    exclude: []
     reject:
       - '/^.$/'
       - '/[0-9]$/'
@@ -18,7 +16,6 @@ detectors:
     enabled: false
   Attribute:
     enabled: false
-    exclude: []
   InstanceVariableAssumption:
     enabled: false
   FeatureEnvy:
@@ -32,3 +29,5 @@ detectors:
     exclude: [
       'Linter#print_block'
     ]
+  NilCheck:
+    enabled: false

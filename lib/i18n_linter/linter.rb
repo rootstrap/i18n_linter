@@ -35,7 +35,7 @@ module I18nLinter
 
     def get_string_array(file, current_index)
       rest_of_file(file, current_index).take_while { |token|
-        token.type != :on_tstring_end
+        !%i[on_tstring_end on_label_end].include?(token.type)
       }.map(&:content)
     end
 
