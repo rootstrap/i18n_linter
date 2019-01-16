@@ -9,13 +9,13 @@ All you have to do is run the following command:
 ```bash
 $ gem install i18n_linter
 ```
-If you want to install using `bundler`, add this to the `Gemfile`:
+If you want to install using `bundler`, add this to the `Gemfile` under the `development` group:
 ```ruby
 gem 'i18n_linter', require: false
 ```
 
 ## Usage
-Just type `i18n_linter` in a Ruby on Rails project's folder and watch the strings that could be internationalized.
+Just type `i18n_linter` in a Ruby on Rails project's folder and watch the strings that could be internationalized. Note: only strings in ruby files will be reported.
 ```
 $ cd my/ruby_on_rails/project
 $ i18n_linter [options]
