@@ -26,3 +26,7 @@ Rules:
     Enabled: true
   Query:
     Enabled: true
+  Strftime:
+    Enabled: true
+  HttpsHeaders:
+    Enabled: true

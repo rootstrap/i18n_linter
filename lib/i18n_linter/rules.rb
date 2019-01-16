@@ -3,7 +3,8 @@ module I18nLinter
     POSITIVE_RULES = %w[Uppercase MiddleSpace].freeze
     # Rules that filters the strings found
     NEGATIVE_RULES = %w[ForwardSlash MiddleDash EnvironmentVariable
-                        ClassName Constant Logger Puts Query].freeze
+                        ClassName Constant Logger Puts Query Strftime
+                        HttpHeaders].freeze
 
     class << self
       def check_rule(rule, plain_line, string_content)
