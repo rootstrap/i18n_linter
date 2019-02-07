@@ -6,12 +6,13 @@ module I18nLinter
     def initialize(options, config)
       @options = options
       @config = config
+      @strings = []
     end
 
     def lint(filename:, file:)
       parsed_file = tokenize_file(filename, file)
-      lines = find_strings(filename, parsed_file)
-      compile(filename, lines)
+      find_strings(filename, parsed_file)
+      compile(filename)
     end
 
     def show_errors(results)
@@ -27,7 +28,7 @@ module I18nLinter
     private
 
     def tokenize_file(filename, file)
-      Ripper.lex(file, filename).map { |token| Token.new(token) }
+      Ripper.sexp(file, filename)
     end
 
     def get_token(file, index)
@@ -44,55 +45,52 @@ module I18nLinter
       file.last(file.length - current_index)
     end
 
-    def find_strings(filename, file)
-      strings = []
-      current_index = 0
+    def find_strings(filename, tokens)
+      return unless array?(tokens)
 
-      while current_index < file.length
-        token = get_token(file, current_index)
-
-        if token.type == :on_tstring_beg
-          new_array_string = get_string_array(file, current_index)
-          current_index += new_array_string.length
-          new_array_string << file[current_index].content
-          new_string = [token.coords, new_array_string.join]
-
-          strings << StringLine.new(new_string) if need_i18n?(filename, new_string)
-        end
-
-        current_index += 1
+      first_child = tokens[0]
+      if array?(first_child)
+        find_strings(filename, first_child)
+        tokens.last(tokens.length - 1).each { |child| find_strings(filename, child) }
+      else
+        check_rules(filename, tokens)
       end
-
-      strings
     end
 
-    def compile(filename, lines)
-      result_set = ResultSet.new
-      lines.each do |line|
-        result_set.add_result(Result.new(filename, line, line.string))
+    def check_rules(filename, tokens)
+      string = tokens[1]
+      if string_element?(tokens)
+        @strings << StringLine.new(tokens[2], string) if Rules.check_string_rules(@config, string)
+      else
+        test_rules(filename, tokens)
       end
+    end
+
+    def array?(elem)
+      elem.class == Array
+    end
+
+    def string_element?(elem)
+      elem[0] == :@tstring_content
+    end
+
+    def compile(filename)
+      result_set = ResultSet.new
+      @strings.each do |string_line|
+        result_set.add_result(Result.new(filename, string_line, string_line.string))
+      end
+      @strings = []
       result_set
     end
 
-    def need_i18n?(filename, line)
-      file = File.readlines(filename)
-      plain_line = file[line[0][0] - 1]
-      string_content = line[1]
+    def test_rules(filename, tokens)
+      return if tokens.empty? || Rules.check_negative_context_rules(@config, tokens)
 
-      check_positive_rules(plain_line, string_content) &&
-        check_negative_rules(plain_line, string_content)
+      rest_of_tokens(filename, tokens, tokens.length)
     end
 
-    def check_positive_rules(plain_line, string_content)
-      @config.enabled_positive_rules.any? do |rule|
-        Rules.check_rule(rule, plain_line, string_content)
-      end
-    end
-
-    def check_negative_rules(plain_line, string_content)
-      @config.enabled_negative_rules.none? do |rule|
-        Rules.check_rule(rule, plain_line, string_content)
-      end
+    def rest_of_tokens(filename, tokens, quantity)
+      tokens.last(quantity - 1).each { |child| find_strings(filename, child) }
     end
 
     def print_block(result, file, line)
