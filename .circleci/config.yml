@@ -7,10 +7,17 @@ jobs:
       - image: circleci/ruby:2.3.8-node-browsers
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: run tests
           command: bundle exec rspec
@@ -34,10 +41,17 @@ jobs:
       - image: circleci/ruby:2.4.5-node-browsers
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: run tests
           command: bundle exec rspec
@@ -61,10 +75,17 @@ jobs:
       - image: circleci/ruby:2.5.3-node-browsers
     steps:
       - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./venv
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run:
           name: run tests
           command: bundle exec rspec

@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - 'spec/deprecated/**/*.rb'
+
 Documentation:
   Enabled: false
 
@@ -15,8 +19,6 @@ Metrics/LineLength:
 
 Style/SymbolArray:
   Enabled: true
-  Exclude:
-    - spec/fixtures/positive_rules/basic_controller.rb # Just for now
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
