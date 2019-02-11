@@ -1,10 +1,9 @@
 module I18nLinter
   module Rules
-    POSITIVE_RULES = %w[Uppercase MiddleSpace].freeze
+    POSITIVE_RULES = %w[].freeze
     # Rules that filters the strings found
-    NEGATIVE_STRING_RULES = %w[ForwardSlash MiddleDash HttpHeaders].freeze
-    NEGATIVE_CONTEXT_RULES = %w[EnvironmentVariable ClassName Constant
-                                Logger Puts Query Strftime HttpHeaders].freeze
+    NEGATIVE_STRING_RULES = %w[].freeze
+    NEGATIVE_CONTEXT_RULES = %w[ClassName].freeze
     NEGATIVE_RULES = NEGATIVE_STRING_RULES + NEGATIVE_CONTEXT_RULES
 
     class << self
