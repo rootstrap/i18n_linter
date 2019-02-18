@@ -1,6 +1,8 @@
 version: 2
 jobs:
   'ruby-2.3.8':
+    environment:
+      CC_TEST_REPORTER_ID: da3874f0744dab9c65054068244203daec995477844deb54ce9480047287dc09
     docker:
       - image: circleci/ruby:2.3.8-node-browsers
     steps:
@@ -19,6 +21,8 @@ jobs:
           name: run reek
           command: bundle exec reek -c config.reek lib
   'ruby-2.4.5':
+    environment:
+      CC_TEST_REPORTER_ID: da3874f0744dab9c65054068244203daec995477844deb54ce9480047287dc09
     docker:
       - image: circleci/ruby:2.4.5-node-browsers
     steps:
@@ -37,6 +41,8 @@ jobs:
           name: run reek
           command: bundle exec reek -c config.reek lib
   'ruby-2.5.3':
+    environment:
+      CC_TEST_REPORTER_ID: da3874f0744dab9c65054068244203daec995477844deb54ce9480047287dc09
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
     steps:
