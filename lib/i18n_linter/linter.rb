@@ -48,18 +48,16 @@ module I18nLinter
     def find_strings(filename, tokens)
       return unless array?(tokens)
 
-      first_child = tokens[0]
-      if array?(first_child)
-        find_strings(filename, first_child)
-        tokens.last(tokens.length - 1).each { |child| find_strings(filename, child) }
+      if array?(tokens[0])
+        tokens.each { |child| find_strings(filename, child) }
       else
         check_rules(filename, tokens)
       end
     end
 
     def check_rules(filename, tokens)
-      string = tokens[1]
       if string_element?(tokens)
+        string = tokens[1]
         @strings << StringLine.new(tokens[2], string) if Rules.check_string_rules(@config, string)
       else
         test_rules(filename, tokens)
@@ -86,11 +84,11 @@ module I18nLinter
     def test_rules(filename, tokens)
       return if tokens.empty? || Rules.check_negative_context_rules(@config, tokens)
 
-      rest_of_tokens(filename, tokens, tokens.length)
+      check_rest_of_tokens(filename, tokens)
     end
 
-    def rest_of_tokens(filename, tokens, quantity)
-      tokens.last(quantity - 1).each { |child| find_strings(filename, child) }
+    def check_rest_of_tokens(filename, tokens)
+      tokens[1..-1].each { |child| find_strings(filename, child) }
     end
 
     def print_block(result, file, line)

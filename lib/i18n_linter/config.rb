@@ -21,15 +21,15 @@ module I18nLinter
     end
 
     def enabled_positive_rules
-      all_rules.keys.select { |rule| positive_rule(rule) && enabled_rule?(rule) }
+      all_rules.keys.select { |rule| positive_rule?(rule) && enabled_rule?(rule) }
     end
 
     def enabled_negative_string_rules
-      all_rules.keys.select { |rule| negative_string_rule(rule) && enabled_rule?(rule) }
+      all_rules.keys.select { |rule| negative_string_rule?(rule) && enabled_rule?(rule) }
     end
 
     def enabled_negative_context_rules
-      all_rules.keys.select { |rule| negative_context_rule(rule) && enabled_rule?(rule) }
+      all_rules.keys.select { |rule| negative_context_rule?(rule) && enabled_rule?(rule) }
     end
 
     private
@@ -50,15 +50,15 @@ module I18nLinter
       all_rules[rule]['Enabled']
     end
 
-    def positive_rule(rule)
+    def positive_rule?(rule)
       Rules::POSITIVE_RULES.include?(rule)
     end
 
-    def negative_context_rule(rule)
+    def negative_context_rule?(rule)
       Rules::NEGATIVE_CONTEXT_RULES.include?(rule)
     end
 
-    def negative_string_rule(rule)
+    def negative_string_rule?(rule)
       Rules::NEGATIVE_STRING_RULES.include?(rule)
     end
 
