@@ -7,7 +7,7 @@ module I18nLinter
     DEFAULT_FILE = File.join(I18N_LINTER_HOME, 'config', 'default.yml')
 
     def initialize
-      path = from_file? ? DOTFILE : DEFAULT_FILE
+      path = File.exist?(DOTFILE) ? DOTFILE : DEFAULT_FILE
       @hash = load_yaml_configuration(path)
       add_missing_rules(@hash['Rules'])
     end
@@ -21,21 +21,21 @@ module I18nLinter
     end
 
     def enabled_positive_rules
-      all_rules.keys.select { |rule| positive_rule(rule) && enabled_rule?(rule) }
+      all_rules.keys.select { |rule| positive_rule?(rule) && enabled_rule?(rule) }
     end
 
-    def enabled_negative_rules
-      all_rules.keys.select { |rule| negative_rule(rule) && enabled_rule?(rule) }
+    def enabled_negative_string_rules
+      all_rules.keys.select { |rule| negative_string_rule?(rule) && enabled_rule?(rule) }
+    end
+
+    def enabled_negative_context_rules
+      all_rules.keys.select { |rule| negative_context_rule?(rule) && enabled_rule?(rule) }
     end
 
     private
 
     def [](key)
       @hash[key]
-    end
-
-    def from_file?
-      File.exist?(DOTFILE)
     end
 
     def linter_patterns
@@ -50,25 +50,25 @@ module I18nLinter
       all_rules[rule]['Enabled']
     end
 
-    def positive_rule(rule)
+    def positive_rule?(rule)
       Rules::POSITIVE_RULES.include?(rule)
     end
 
-    def negative_rule(rule)
-      Rules::NEGATIVE_RULES.include?(rule)
+    def negative_context_rule?(rule)
+      Rules::NEGATIVE_CONTEXT_RULES.include?(rule)
+    end
+
+    def negative_string_rule?(rule)
+      Rules::NEGATIVE_STRING_RULES.include?(rule)
     end
 
     def load_yaml_configuration(path)
       yaml_code = File.read(path)
-      hash = yaml_safe_load(yaml_code, path) || {}
+      hash = YAML.safe_load(yaml_code, [Regexp, Symbol], [], false, path) || {}
 
       raise(TypeError, "Malformed configuration in #{path}") unless hash.is_a?(Hash)
 
       hash
-    end
-
-    def yaml_safe_load(yaml_code, filename)
-      YAML.safe_load(yaml_code, [Regexp, Symbol], [], false, filename)
     end
 
     def add_missing_rules(loaded_rules)
