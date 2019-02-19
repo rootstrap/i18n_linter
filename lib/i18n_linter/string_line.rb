@@ -4,11 +4,10 @@ module I18nLinter
     attr_reader :column_number
     attr_reader :string
 
-    def initialize(line)
-      string_position = line[0]
-      @line_number = string_position[0]
-      @column_number = string_position[1]
-      @string = line[1]
+    def initialize(coords, string)
+      @line_number = coords[0]
+      @column_number = coords[1]
+      @string = string
     end
   end
 end
