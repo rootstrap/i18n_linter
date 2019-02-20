@@ -1,6 +1,8 @@
 # I18nLinter
 
 [![CircleCI](https://circleci.com/gh/rootstrap/i18n_linter/tree/master.svg?style=svg&circle-token=15c1ee79b304665b14e47e04dc7577c715de293c)](https://circleci.com/gh/rootstrap/i18n_linter/tree/master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/50f3ec30e8147c3df712/maintainability)](https://codeclimate.com/repos/5c6b0bbdd561465d35008579/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/50f3ec30e8147c3df712/test_coverage)](https://codeclimate.com/repos/5c6b0bbdd561465d35008579/test_coverage)
 
 Internationalization linter for your Ruby on Rails projects.
 

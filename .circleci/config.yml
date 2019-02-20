@@ -1,6 +1,8 @@
 version: 2
 jobs:
   'ruby-2.3.8':
+    environment:
+      CC_TEST_REPORTER_ID: da3874f0744dab9c65054068244203daec995477844deb54ce9480047287dc09
     docker:
       - image: circleci/ruby:2.3.8-node-browsers
     steps:
@@ -18,7 +20,16 @@ jobs:
       - run:
           name: run reek
           command: bundle exec reek -c config.reek lib
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+            ./cc-test-reporter after-build
   'ruby-2.4.5':
+    environment:
+      CC_TEST_REPORTER_ID: da3874f0744dab9c65054068244203daec995477844deb54ce9480047287dc09
     docker:
       - image: circleci/ruby:2.4.5-node-browsers
     steps:
@@ -36,7 +47,16 @@ jobs:
       - run:
           name: run reek
           command: bundle exec reek -c config.reek lib
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+            ./cc-test-reporter after-build
   'ruby-2.5.3':
+    environment:
+      CC_TEST_REPORTER_ID: da3874f0744dab9c65054068244203daec995477844deb54ce9480047287dc09
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
     steps:
@@ -54,7 +74,13 @@ jobs:
       - run:
           name: run reek
           command: bundle exec reek -c config.reek lib
-
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+            ./cc-test-reporter after-build
 workflows:
   version: 2
   build:
