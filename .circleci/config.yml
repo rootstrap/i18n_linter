@@ -9,31 +9,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-{{ checksum "Gemfiles/Gemfile.2.3.8.lock" }}
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            BUNDLE_GEMFILE=Gemfiles/Gemfile.2.3.8 bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "Gemfiles/Gemfile.2.3.8.lock" }}
       - run:
           name: run tests
-          command: bundle exec rspec
-      - run:
-          name: run rubocop
-          command: bundle exec rubocop
-      - run:
-          name: run reek
-          command: bundle exec reek -c config.reek lib
-      - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
-            ./cc-test-reporter before-build
-            ./cc-test-reporter after-build
+          command: BUNDLE_GEMFILE=Gemfiles/Gemfile.2.3.8 bundle exec rspec
   'ruby-2.4.5':
     environment:
       CC_TEST_REPORTER_ID: da3874f0744dab9c65054068244203daec995477844deb54ce9480047287dc09
@@ -43,31 +30,18 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-{{ checksum "Gemfiles/Gemfile.2.4.5.lock" }}
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            BUNDLE_GEMFILE=Gemfiles/Gemfile.2.4.5 bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "Gemfiles/Gemfile.2.4.5.lock" }}
       - run:
           name: run tests
-          command: bundle exec rspec
-      - run:
-          name: run rubocop
-          command: bundle exec rubocop
-      - run:
-          name: run reek
-          command: bundle exec reek -c config.reek lib
-      - run:
-          name: Setup Code Climate test-reporter
-          command: |
-            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-            chmod +x ./cc-test-reporter
-            ./cc-test-reporter before-build
-            ./cc-test-reporter after-build
+          command: BUNDLE_GEMFILE=Gemfiles/Gemfile.2.4.5 bundle exec rspec
   'ruby-2.5.3':
     environment:
       CC_TEST_REPORTER_ID: da3874f0744dab9c65054068244203daec995477844deb54ce9480047287dc09
@@ -77,24 +51,24 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-{{ checksum "Gemfiles/Gemfile.2.5.3.lock" }}
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+            BUNDLE_GEMFILE=Gemfiles/Gemfile.2.5.3 bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
           paths:
             - ./venv
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1-dependencies-{{ checksum "Gemfiles/Gemfile.2.5.3.lock" }}
       - run:
           name: run tests
-          command: bundle exec rspec
+          command: BUNDLE_GEMFILE=Gemfiles/Gemfile.2.5.3 bundle exec rspec
       - run:
           name: run rubocop
-          command: bundle exec rubocop
+          command: BUNDLE_GEMFILE=Gemfiles/Gemfile.2.5.3 bundle exec rubocop -c .rubocop.yml
       - run:
           name: run reek
-          command: bundle exec reek -c config.reek lib
+          command: BUNDLE_GEMFILE=Gemfiles/Gemfile.2.5.3 bundle exec reek -c config.reek lib
       - run:
           name: Setup Code Climate test-reporter
           command: |

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'yaml'
 
 module I18nLinter
   class Config
-    DOTFILE = '.i18n_linter.yml'.freeze
+    DOTFILE = '.i18n_linter.yml'
     I18N_LINTER_HOME = File.realpath(File.join(File.dirname(__FILE__), '..', '..'))
     DEFAULT_FILE = File.join(I18N_LINTER_HOME, 'config', 'default.yml')
 
