@@ -1,6 +1,9 @@
 AllCops:
   Exclude:
     - 'spec/deprecated/**/*.rb'
+    - 'config/**/*'
+    - 'exe/**/*'
+    - 'Gemfiles/**/*'
 
 Documentation:
   Enabled: false

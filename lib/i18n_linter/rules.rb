@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module I18nLinter
   module Rules
     POSITIVE_RULES = %w[].freeze
