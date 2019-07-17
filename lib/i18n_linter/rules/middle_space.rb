@@ -3,7 +3,7 @@
 module I18nLinter
   module Rules
     class MiddleSpace
-      def check(_plain_line, string)
+      def check(string)
         /.\s+./ =~ string
       end
     end

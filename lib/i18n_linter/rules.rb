@@ -2,7 +2,7 @@
 
 module I18nLinter
   module Rules
-    POSITIVE_RULES = %w[].freeze
+    POSITIVE_RULES = %w[Uppercase MiddleSpace].freeze
     # Rules that filters the strings found
     NEGATIVE_STRING_RULES = %w[].freeze
     NEGATIVE_CONTEXT_RULES = %w[ClassName].freeze
