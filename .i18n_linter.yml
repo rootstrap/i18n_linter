@@ -2,27 +2,25 @@ Linter:
   Include:
     - 'spec/fixtures/**/*.rb'
 Rules:
-  MiddleSpace:
-    Enabled: true
-  ForwardSlash:
-    Enabled: true
-  MiddleDash:
-    Enabled: true
-  EnvironmentVariable:
-    Enabled: true
   ClassName:
     Enabled: true
   Constant:
     Enabled: true
+  EnvironmentVariable:
+    Enabled: true
+  HttpHeaders:
+    Enabled: true
   Logger:
+    Enabled: true
+  MiddleSpace:
     Enabled: true
   Puts:
     Enabled: true
-  Query:
+  Scope:
     Enabled: true
   Strftime:
     Enabled: true
-  HttpsHeaders:
+  Uppercase:
     Enabled: true
   Words:
     Enabled: true

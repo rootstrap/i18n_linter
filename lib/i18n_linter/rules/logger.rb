@@ -3,12 +3,16 @@
 module I18nLinter
   module Rules
     class Logger
-      def check(plain_line, string)
-        escaped_string = Regexp.escape(string)
+      LOGGER_IDENT = 'logger'
 
-        /logger\.\w+\s*\(\s*#{escaped_string}\s*\)/ =~ plain_line ||
-          /logger\.\w+\s*#{escaped_string}/ =~ plain_line ||
-          /logger\.\w+\s*\{\s*#{escaped_string}\s*\}/ =~ plain_line
+      def check(tokens)
+        command_or_method(tokens) && I18nLinter::Digger.new(:@ident).find(LOGGER_IDENT, tokens[1])
+      end
+
+      private
+
+      def command_or_method(tokens)
+        %i[command_call method_add_block method_add_arg].include?(tokens[0])
       end
     end
   end

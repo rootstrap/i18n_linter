@@ -84,7 +84,7 @@ module I18nLinter
     end
 
     def test_rules(filename, tokens)
-      return if tokens.empty? || Rules.check_negative_context_rules(@config, tokens)
+      return if tokens.empty? || Rules.check_negative_rules(@config, tokens)
 
       check_rest_of_tokens(filename, tokens)
     end

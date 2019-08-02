@@ -3,11 +3,11 @@
 module I18nLinter
   module Rules
     class Strftime
-      def check(plain_line, string)
-        escaped_string = Regexp.escape(string)
+      STRFTIME_IDENT = 'strftime'
 
-        /strftime\s*\(#{escaped_string}\)/ =~ plain_line ||
-          /strftime\s+#{escaped_string}/ =~ plain_line
+      def check(tokens)
+        tokens[0] == :method_add_arg &&
+          I18nLinter::Digger.new(:@ident).find(STRFTIME_IDENT, tokens[1])
       end
     end
   end

@@ -3,15 +3,10 @@
 module I18nLinter
   module Rules
     class ClassName
+      CLASS_NAME_LABEL = 'class_name:'
+
       def check(tokens)
-        tokens[0] == :assoc_new && class_name_label(tokens)
-      end
-
-      private
-
-      def class_name_label(tokens)
-        label_tokens = tokens[1]
-        label_tokens[0] == :@label && label_tokens[1] == 'class_name:'
+        tokens[0] == :assoc_new && I18nLinter::Digger.new(:@label).find(CLASS_NAME_LABEL, tokens[1])
       end
     end
   end

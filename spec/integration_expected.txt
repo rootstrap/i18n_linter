@@ -1,7 +1,7 @@
 
 [0;32;49mspec/fixtures/positive_rules/middle_space.rb:6:29
 [0m5:      do_something
-[0;31;49m6:      render json: { message: 'successfully updated' }
+[0;31;49m6:      render json: { message: 'Success' }
 [0m7:    end
 
 
