@@ -13,6 +13,8 @@ require 'i18n_linter/rules/puts'
 require 'i18n_linter/rules/scope'
 require 'i18n_linter/rules/strftime'
 require 'i18n_linter/rules/http_headers'
+require 'i18n_linter/rules/underscore'
+require 'i18n_linter/rules/reg_exp'
 
 require 'i18n_linter/helpers/digger'
 require 'i18n_linter/options'

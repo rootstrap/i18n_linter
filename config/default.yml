@@ -20,9 +20,13 @@ Rules:
     Enabled: true
   Puts:
     Enabled: true
+  RegExp:
+    Enabled: true
   Scope:
     Enabled: true
   Strftime:
+    Enabled: true
+  Underscore:
     Enabled: true
   Uppercase:
     Enabled: true

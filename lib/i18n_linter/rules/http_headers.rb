@@ -4,14 +4,23 @@ module I18nLinter
   module Rules
     class HttpHeaders
       def check(tokens)
-        tokens[0] == :assoc_new && string_literal(tokens)
+        tokens[0] == :assoc_new && literal_or_symbol(tokens)
       end
 
       private
 
-      def string_literal(tokens)
-        literal_tokens = tokens[1]
-        literal_tokens[0] == :string_literal && string_content(literal_tokens)
+      def literal_or_symbol(tokens)
+        literal_symbol_tokens = tokens[1]
+        (literal(literal_symbol_tokens) || symbol(literal_symbol_tokens)) &&
+          string_content(literal_symbol_tokens)
+      end
+
+      def literal(tokens)
+        tokens[0] == :string_literal
+      end
+
+      def symbol(tokens)
+        tokens[0] == :dyna_symbol
       end
 
       def string_content(tokens)
@@ -25,8 +34,8 @@ module I18nLinter
       end
 
       def http_header(tokens)
-        string = tokens[1]
-        I18nLinter::Constants::HTTP_HEADERS.any? do |header|
+        string = tokens[1].downcase
+        I18nLinter::Constants::HTTP_HEADERS.map(&:downcase).any? do |header|
           string.include?(header)
         end
       end
