@@ -4,7 +4,7 @@ require 'i18n_linter/linter'
 
 require 'i18n_linter/rules'
 require 'i18n_linter/rules/middle_space'
-require 'i18n_linter/rules/uppercase'
+require 'i18n_linter/rules/words'
 require 'i18n_linter/rules/forward_slash'
 require 'i18n_linter/rules/middle_dash'
 require 'i18n_linter/rules/environment_variable'

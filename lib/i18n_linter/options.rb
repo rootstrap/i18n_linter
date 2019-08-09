@@ -10,9 +10,9 @@ module I18nLinter
     end
 
     def files
-      return Dir[*@files].uniq if @files
+      return Dir[*@files].uniq.sort if @files
 
-      supported_files
+      supported_files.sort
     end
 
     private

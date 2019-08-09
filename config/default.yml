@@ -6,8 +6,6 @@ Linter:
     - 'spec/**/*'
     - 'db/**/*'
 Rules:
-  Uppercase:
-    Enabled: true
   MiddleSpace:
     Enabled: true
   ForwardSlash:
@@ -29,4 +27,6 @@ Rules:
   Strftime:
     Enabled: true
   HttpsHeaders:
+    Enabled: true
+  Words:
     Enabled: true
