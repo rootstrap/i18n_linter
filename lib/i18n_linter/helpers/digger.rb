@@ -6,26 +6,26 @@ module I18nLinter
       @type = type
     end
 
-    def find(target, tree)
+    def find(targets, tree)
       return false unless tree.is_a? Array
-      return true if target_found?(target, tree)
+      return true if target_found?(targets, tree)
 
       tree.each do |item|
-        return true if find(target, item)
+        return true if find(targets, item)
       end
       false
     end
 
-    def target_found?(target, tree)
-      matches_type?(tree[0]) && matches_target?(tree[1], target)
+    def target_found?(targets, tree)
+      matches_type?(tree[0]) && matches_target?(tree[1], targets)
     end
 
     def matches_type?(item)
       item == @type
     end
 
-    def matches_target?(item, target)
-      item == target
+    def matches_target?(item, targets)
+      targets.include?(item)
     end
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class EnvironmentVariable < ApplicationRecord
+class EnvironmentVariable < ApplicationController
   def some_action
     do_something
     post('some_url',

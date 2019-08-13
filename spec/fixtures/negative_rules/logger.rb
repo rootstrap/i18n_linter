@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Logger < ApplicationRecord
+class Logger < ApplicationController
   def action_log(action)
     Rails.logger.info 'Action name: ' + action.name
     Rails.logger.debug('Status: ' + action.status)

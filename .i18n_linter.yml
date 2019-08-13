@@ -14,7 +14,11 @@ Rules:
     Enabled: true
   MiddleSpace:
     Enabled: true
+  MimeType:
+    Enabled: true
   Puts:
+    Enabled: true
+  Query:
     Enabled: true
   RegExp:
     Enabled: true
@@ -23,8 +27,6 @@ Rules:
   Strftime:
     Enabled: true
   Underscore:
-    Enabled: true
-  Uppercase:
     Enabled: true
   Words:
     Enabled: true

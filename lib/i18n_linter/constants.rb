@@ -91,5 +91,11 @@ module I18nLinter
       X-Frame-Options
       X-XSS-Protection
     ].freeze
+
+    QUERY_METHODS = %w[
+      annotate find find_by create_with distinct eager_load extending extract_associated from group
+      having includes joins left_outer_joins limit lock none offset optimizer_hints order
+      preload readonly references reorder reselect reverse_order select where
+    ].freeze
   end
 end

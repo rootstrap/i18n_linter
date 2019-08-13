@@ -103,7 +103,7 @@ module I18nLinter
 
       output = "#{result.filename}:#{line_number}:#{column_number}\n".colorize(:green)
       output += "#{line_number - 1}:  #{previous_line}" if previous_line
-      output += "#{line_number}:  #{current_line}".colorize(:red)
+      output += "#{line_number}:  #{current_line}".colorize(:yellow)
       output += "#{line_number + 1}:  #{next_line}" if next_line
 
       puts output

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class HttpHeaders < ApplicationRecord
+class HttpHeaders < ApplicationController
   def some_action
     do_something
     post(

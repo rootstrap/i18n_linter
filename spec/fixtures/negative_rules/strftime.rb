@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Strftime < ApplicationRecord
+class Strftime < ApplicationController
   def today
     date = Time.now.strftime("It's %I:%M%p on %A %B %d, %Y")
     puts date

@@ -6,7 +6,8 @@ module I18nLinter
       CLASS_NAME_LABEL = 'class_name:'
 
       def check(tokens)
-        tokens[0] == :assoc_new && I18nLinter::Digger.new(:@label).find(CLASS_NAME_LABEL, tokens[1])
+        tokens[0] == :assoc_new &&
+          I18nLinter::Digger.new(:@label).find([CLASS_NAME_LABEL], tokens[1])
       end
     end
   end

@@ -6,7 +6,7 @@ module I18nLinter
       SCOPE_IDENT = 'scope'
 
       def check(tokens)
-        tokens[0] == :command && I18nLinter::Digger.new(:@ident).find(SCOPE_IDENT, tokens[1])
+        tokens[0] == :command && I18nLinter::Digger.new(:@ident).find([SCOPE_IDENT], tokens[1])
       end
     end
   end

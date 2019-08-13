@@ -6,7 +6,7 @@ module I18nLinter
     # Rules that filter the strings found
     NEGATIVE_RULES = %w[
       ClassName Constant EnvironmentVariable HttpHeaders
-      Logger Puts RegExp Scope Strftime Underscore
+      Logger MimeType Puts Query RegExp Scope Strftime Underscore
     ].freeze
 
     class << self

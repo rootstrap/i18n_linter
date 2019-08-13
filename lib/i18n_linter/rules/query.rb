@@ -2,12 +2,10 @@
 
 module I18nLinter
   module Rules
-    class Strftime
-      STRFTIME_IDENT = 'strftime'
-
+    class Query
       def check(tokens)
         tokens[0] == :method_add_arg &&
-          I18nLinter::Digger.new(:@ident).find([STRFTIME_IDENT], tokens[1])
+          I18nLinter::Digger.new(:@ident).find(I18nLinter::Constants::QUERY_METHODS, tokens[1])
       end
     end
   end

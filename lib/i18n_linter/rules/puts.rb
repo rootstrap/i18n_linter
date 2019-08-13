@@ -6,7 +6,7 @@ module I18nLinter
       PUTS_IDENT = 'puts'
 
       def check(tokens)
-        command_or_method(tokens) && I18nLinter::Digger.new(:@ident).find(PUTS_IDENT, tokens[1])
+        command_or_method(tokens) && I18nLinter::Digger.new(:@ident).find([PUTS_IDENT], tokens[1])
       end
 
       private

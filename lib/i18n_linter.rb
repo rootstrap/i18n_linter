@@ -15,6 +15,8 @@ require 'i18n_linter/rules/strftime'
 require 'i18n_linter/rules/http_headers'
 require 'i18n_linter/rules/underscore'
 require 'i18n_linter/rules/reg_exp'
+require 'i18n_linter/rules/query'
+require 'i18n_linter/rules/mime_type'
 
 require 'i18n_linter/helpers/digger'
 require 'i18n_linter/options'

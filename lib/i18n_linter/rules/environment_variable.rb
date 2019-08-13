@@ -6,7 +6,7 @@ module I18nLinter
       ENV_CONST = 'ENV'
 
       def check(tokens)
-        reference_or_method(tokens) && I18nLinter::Digger.new(:@const).find(ENV_CONST, tokens[1])
+        reference_or_method(tokens) && I18nLinter::Digger.new(:@const).find([ENV_CONST], tokens[1])
       end
 
       private
