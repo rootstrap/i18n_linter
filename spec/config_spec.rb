@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Configuration Test' do
   configuration = I18nLinter::Config.new
 

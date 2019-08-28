@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'i18n_linter/linter'
 
 require 'i18n_linter/rules'

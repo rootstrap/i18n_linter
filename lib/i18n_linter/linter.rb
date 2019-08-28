@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'i18n_linter'
-require 'rainbow'
+require 'colorize'
 
 module I18nLinter
   class Linter
@@ -99,9 +101,9 @@ module I18nLinter
       current_line = file[line_number - 1]
       next_line = file[line_number] if line_number < file.length
 
-      output = Rainbow("#{result.filename}:#{line_number}:#{column_number}\n").green
+      output = "#{result.filename}:#{line_number}:#{column_number}\n".colorize(:green)
       output += "#{line_number - 1}:  #{previous_line}" if previous_line
-      output += Rainbow("#{line_number}:  #{current_line}").red
+      output += "#{line_number}:  #{current_line}".colorize(:red)
       output += "#{line_number + 1}:  #{next_line}" if next_line
       output += '-' * 16
 
