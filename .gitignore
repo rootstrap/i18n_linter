@@ -1,4 +1,5 @@
 .byebug_history
+Gemfile.lock
 spec/integration_result.txt
 i18n_linter-1.0.0.gem
 /coverage/
