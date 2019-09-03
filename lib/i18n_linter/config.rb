@@ -26,12 +26,8 @@ module I18nLinter
       all_rules.keys.select { |rule| positive_rule?(rule) && enabled_rule?(rule) }
     end
 
-    def enabled_negative_string_rules
-      all_rules.keys.select { |rule| negative_string_rule?(rule) && enabled_rule?(rule) }
-    end
-
-    def enabled_negative_context_rules
-      all_rules.keys.select { |rule| negative_context_rule?(rule) && enabled_rule?(rule) }
+    def enabled_negative_rules
+      all_rules.keys.select { |rule| negative_rule?(rule) && enabled_rule?(rule) }
     end
 
     private
@@ -56,12 +52,8 @@ module I18nLinter
       Rules::POSITIVE_RULES.include?(rule)
     end
 
-    def negative_context_rule?(rule)
-      Rules::NEGATIVE_CONTEXT_RULES.include?(rule)
-    end
-
-    def negative_string_rule?(rule)
-      Rules::NEGATIVE_STRING_RULES.include?(rule)
+    def negative_rule?(rule)
+      Rules::NEGATIVE_RULES.include?(rule)
     end
 
     def load_yaml_configuration(path)

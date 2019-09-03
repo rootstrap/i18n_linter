@@ -20,6 +20,9 @@ GEM
     jaro_winkler (1.5.3)
     json (2.2.0)
     kwalify (0.7.2)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2019.0331)
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
@@ -70,6 +73,7 @@ PLATFORMS
 
 DEPENDENCIES
   colorize (~> 0.8.1)
+  mime-types (~> 3.2.2)
   reek (~> 5.4)
   rspec (~> 3.8)
   rubocop (~> 0.73)

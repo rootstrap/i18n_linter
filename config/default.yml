@@ -6,27 +6,31 @@ Linter:
     - 'spec/**/*'
     - 'db/**/*'
 Rules:
-  MiddleSpace:
-    Enabled: true
-  ForwardSlash:
-    Enabled: true
-  MiddleDash:
-    Enabled: true
-  EnvironmentVariable:
-    Enabled: true
   ClassName:
     Enabled: true
   Constant:
     Enabled: true
+  EnvironmentVariable:
+    Enabled: true
+  HttpHeaders:
+    Enabled: true
   Logger:
+    Enabled: true
+  MiddleSpace:
+    Enabled: true
+  MimeType:
     Enabled: true
   Puts:
     Enabled: true
   Query:
     Enabled: true
+  RegExp:
+    Enabled: true
+  Scope:
+    Enabled: true
   Strftime:
     Enabled: true
-  HttpsHeaders:
+  Underscore:
     Enabled: true
   Words:
     Enabled: true

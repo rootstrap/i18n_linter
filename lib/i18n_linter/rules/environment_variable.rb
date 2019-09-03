@@ -3,11 +3,16 @@
 module I18nLinter
   module Rules
     class EnvironmentVariable
-      def check(plain_line, string)
-        escaped_string = Regexp.escape(string)
+      ENV_CONST = 'ENV'
 
-        /ENV\[#{escaped_string}\]/ =~ plain_line ||
-          /ENV\.fetch\(#{escaped_string}\)/ =~ plain_line
+      def check(tokens)
+        reference_or_method(tokens) && I18nLinter::Digger.new(:@const).find([ENV_CONST], tokens[1])
+      end
+
+      private
+
+      def reference_or_method(tokens)
+        %i[aref method_add_arg].include?(tokens[0])
       end
     end
   end

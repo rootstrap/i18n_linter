@@ -2,9 +2,9 @@
 
 module I18nLinter
   module Rules
-    class ForwardSlash
-      def check(_plain_line, string)
-        %r{\/} =~ string
+    class RegExp
+      def check(tokens)
+        tokens[0] == :regexp_literal
       end
     end
   end

@@ -1,12 +1,12 @@
 
 [0;32;49mspec/fixtures/positive_rules/middle_space.rb:6:29
 [0m5:      do_something
-[0;31;49m6:      render json: { message: 'successfully updated' }
+[0;33;49m6:      render json: { message: 'successfully updated' }
 [0m7:    end
 
 
 [0;32;49mspec/fixtures/positive_rules/words.rb:7:29
 [0m6:      # Detected -> Starts with uppercase and have at least one lowercase
-[0;31;49m7:      render json: { message: 'Success' }
+[0;33;49m7:      render json: { message: 'Success' }
 [0m8:    end
 

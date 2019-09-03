@@ -3,99 +3,40 @@
 module I18nLinter
   module Rules
     class HttpHeaders
-      HTTP_HEADERS = %w[
-        Accept
-        Accept-Charset
-        Accept-Encoding
-        Accept-Language
-        Accept-Ranges
-        Access-Control-Allow-Credentials
-        Access-Control-Allow-Headers
-        Access-Control-Allow-Methods
-        Access-Control-Allow-Origin
-        Access-Control-Expose-Headers
-        Access-Control-Max-Age
-        Access-Control-Request-Headers
-        Access-Control-Request-Method
-        Age
-        Allow
-        Alt-Svc
-        Authorization
-        Cache-Control
-        Clear-Site-Data
-        Connection
-        Content-Disposition
-        Content-Encoding
-        Content-Language
-        Content-Length
-        Content-Location
-        Content-Range
-        Content-Security-Policy
-        Content-Security-Policy-Report-Only
-        Content-Type
-        Cookie
-        Cookie2
-        DNT
-        Date
-        ETag
-        Early-Data
-        Expect
-        Expect-CT
-        Expires
-        Feature-Policy
-        Forwarded
-        From
-        Host
-        If-Match
-        If-Modified-Since
-        If-None-Match
-        If-Range
-        If-Unmodified-Since
-        Index
-        Keep-Alive
-        Large-Allocation
-        Last-Modified
-        Location
-        Origin
-        Pragma
-        Proxy-Authenticate
-        Proxy-Authorization
-        Public-Key-Pins
-        Public-Key-Pins-Report-Only
-        Range
-        Referer
-        Referrer-Policy
-        Retry-After
-        Sec-WebSocket-Accept
-        Server
-        Server-Timing
-        Set-Cookie
-        Set-Cookie2
-        SourceMap
-        Strict-Transport-Security
-        TE
-        Timing-Allow-Origin
-        Tk
-        Trailer
-        Transfer-Encoding
-        Upgrade-Insecure-Requests
-        User-Agent
-        Vary
-        Via
-        WWW-Authenticate
-        Warning
-        X-Content-Type-Options
-        X-DNS-Prefetch-Control
-        X-Forwarded-For
-        X-Forwarded-Host
-        X-Forwarded-Proto
-        X-Frame-Options
-        X-XSS-Protection
-      ].freeze
+      def check(tokens)
+        tokens[0] == :assoc_new && literal_or_symbol(tokens)
+      end
 
-      def check(plain_line, _string)
-        HTTP_HEADERS.any? do |header|
-          plain_line.include?(header)
+      private
+
+      def literal_or_symbol(tokens)
+        literal_symbol_tokens = tokens[1]
+        (literal(literal_symbol_tokens) || symbol(literal_symbol_tokens)) &&
+          string_content(literal_symbol_tokens)
+      end
+
+      def literal(tokens)
+        tokens[0] == :string_literal
+      end
+
+      def symbol(tokens)
+        tokens[0] == :dyna_symbol
+      end
+
+      def string_content(tokens)
+        content_tokens = tokens[1]
+        content_tokens[0] == :string_content && header_string(content_tokens)
+      end
+
+      def header_string(tokens)
+        header_tokens = tokens[1]
+        header_tokens[0] == :@tstring_content && http_header(header_tokens)
+      end
+
+      def http_header(tokens)
+        string = tokens[1].downcase
+        I18nLinter::Constants::HTTP_HEADERS.map(&:downcase).any? do |header|
+          string.include?(header)
         end
       end
     end
