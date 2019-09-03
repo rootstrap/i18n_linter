@@ -2,9 +2,9 @@
 
 module I18nLinter
   module Rules
-    class MiddleSpace
+    class Words
       def check(string)
-        /.\s+./ =~ string
+        /^[A-Z].*[a-z]/ =~ string.strip
       end
     end
   end
