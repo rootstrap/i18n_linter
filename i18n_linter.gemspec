@@ -7,7 +7,7 @@ require 'i18n_linter/version'
 Gem::Specification.new do |s|
   s.name        = 'i18n_linter'
   s.version     = I18nLinter::VERSION
-  s.date        = '2018-11-14'
+  s.date        = '2019-10-04'
   s.summary     = 'i18n linter plugin'
   s.description = s.summary
   s.authors     = ['Franco Pariani']
