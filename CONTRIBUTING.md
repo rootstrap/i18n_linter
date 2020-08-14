@@ -1,6 +1,6 @@
 ## Contributing ##
 
-You can contribute to this repo if you have an issue, found a bug or think there's some functionality required that would add value to the gem. To do so, please check if there's not already an [issue](https://github.com/rootstrap/rsgem/issues) for that, if you find there's not, create a new one with as much detail as possible.
+You can contribute to this repo if you have an issue, found a bug or think there's some functionality required that would add value to the gem. To do so, please check if there's not already an [issue](https://github.com/rootstrap/i18n_linter/issues) for that, if you find there's not, create a new one with as much detail as possible.
 
 If you want to contribute with code as well, please follow the next steps:
 
