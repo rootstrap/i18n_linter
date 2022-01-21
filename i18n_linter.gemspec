@@ -23,6 +23,10 @@ Gem::Specification.new do |s|
   # Dependencies
   s.add_dependency 'colorize', '~> 0.8.1'
 
+  if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new('3.0.0')
+    s.add_dependency 'mime-types', '~> 3.0'
+  end
+
   s.add_development_dependency 'reek', '~> 5.2'
   s.add_development_dependency 'rspec', '~> 3.8'
   s.add_development_dependency 'rubocop', '~> 0.59.2'
